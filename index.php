@@ -36,7 +36,7 @@
             <table id="tabla" border="1">
 
             </table><br>
-            <label for="iteracion" id="titulo-iteracion" style="display: none">Iteracion</label><input type="number" min="1" required id="iteracion" name="iteracion" style="display: none" placeholder="Ingresa la cantidad de iteraciones">
+            <label for="iteracion" id="titulo-iteracion" style="display: none">Iteracion</label><input type="number" min="1" max="50" required id="iteracion" name="iteracion" style="display: none" placeholder="Ingresa la cantidad de iteraciones">
             <input id="fil-cuadro" name="fil-cuadro" style="display: none">
             <input id="col-cuadro" name="col-cuadro" style="display: none"><br>
             <input type="submit" style="display: none" id="enviar">

@@ -35,7 +35,11 @@ for ($i=0; $i<$filas; $i++){
     echo "<tr>";
     for ($j=0; $j<$columnas; $j++){
         $ubicacion = "c" . $i . "-" . $j;
-        echo "<td>" . $matriz[$ubicacion] . "</td>";
+        if ($matriz[$ubicacion]==0){
+            echo "<td style='background: #6d9eeb'>" . $matriz[$ubicacion] . "</td>";
+        }else{
+            echo "<td style='background: #93c47d'>" . $matriz[$ubicacion] . "</td>";
+        }
     }
     echo "</tr>";
 }
@@ -159,11 +163,10 @@ for ($k=0; $k<$iteracion; $k++){
             $reglas = mysqli_query($con, "SELECT `reglas`.`id_regla`, `reglas`.`id_tipo`, `tipo_validacion`.`validacion`, `reglas`.`valor` FROM `reglas` INNER  JOIN `tipo_validacion` ON `tipo_validacion`.`id_validacion`=`reglas`.`validacion` AND `reglas`.`estado`=1");
             while ($regla = mysqli_fetch_array($reglas)){
                 if (isset($conteo[1])){
-                    $valida = intval($conteo[1]) . $regla['validacion'] . intval($regla['valor']);
-                    //echo $valida;
+                    //echo $conteo['1'];
                     switch ($regla['validacion']){
                         case '<':
-                            if ($conteo[1] < intval($regla['valor'])){
+                            if (intval($conteo['1']) < intval($regla['valor'])){
                                 if ($regla['id_tipo']==1){
                                     $matrizsalida[$ubicacion] = 0;
                                 }elseif ($regla['id_tipo']==2){
@@ -219,6 +222,8 @@ for ($k=0; $k<$iteracion; $k++){
                             }
                             break;
                     }
+                }else{
+                    $matrizsalida[$ubicacion] = 0;
                 }
             }
             /*if (isset($conteo[1])) {
@@ -242,12 +247,18 @@ for ($k=0; $k<$iteracion; $k++){
     //var_dump($matrizsalida);
     $matriz=$matrizsalida;
     //var_dump($mini);
-    echo "<table>";
+    $itera = $k+1;
+    echo "<label>Iteracion: " . $itera ."</label><br><table>";
     for ($i=0; $i<$filas; $i++){
         echo "<tr>";
         for ($j=0; $j<$columnas; $j++){
             $ubicacion = "c" . $i . "-" . $j;
-            echo "<td>" . $matriz[$ubicacion] . "</td>";
+            if ($matriz[$ubicacion]==0){
+                echo "<td style='background: #6d9eeb'>" . $matriz[$ubicacion] . "</td>";
+            }else{
+                echo "<td style='background: #93c47d'>" . $matriz[$ubicacion] . "</td>";
+            }
+
         }
         echo "</tr>";
     }
