@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>El Juego De La Vida</title>
+    <meta charset="UTF-8">
+    <!-- Estilos -->
+    <!--<link href="../css/estilos.css" rel="stylesheet">-->
+    <link href="css/estilos.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/script.js" type="application/javascript"></script>
+</head>
+<body>
+<a href="index.php"><img src="img/back.png" width="25"></a>
+<center>
 <?php
 /**
  * Created by PhpStorm.
@@ -30,21 +45,21 @@ $matrizsalida = $matriz;
 //var_dump($matriz);
 //echo "<br><br>";
 //var_dump($matrizsalida);
-echo "<table>";
+echo "<b><label>Estado 0:</label></b><table class='iteracion'>";
 for ($i=0; $i<$filas; $i++){
     echo "<tr>";
     for ($j=0; $j<$columnas; $j++){
         $ubicacion = "c" . $i . "-" . $j;
         if ($matriz[$ubicacion]==0){
-            echo "<td style='background: #6d9eeb'>" . $matriz[$ubicacion] . "</td>";
+            echo "<td class='muerto'></td>";
         }else{
-            echo "<td style='background: #93c47d'>" . $matriz[$ubicacion] . "</td>";
+            echo "<td class='vivo'>" . $matriz[$ubicacion] . "</td>";
         }
     }
     echo "</tr>";
 }
 echo "</table>";
-echo "<br><br>";
+echo "<br>";
 
 $contador1 = 0;
 for ($k=0; $k<$iteracion; $k++){
@@ -159,6 +174,9 @@ for ($k=0; $k<$iteracion; $k++){
             //echo "<br><br>";
             $ubicacion = "c" . $i . "-" . $j;
 
+            /*********
+             * Validacion con reglas administradas
+             */
             //  var_dump($vidas);
             $reglas = mysqli_query($con, "SELECT `reglas`.`id_regla`, `reglas`.`id_tipo`, `tipo_validacion`.`validacion`, `reglas`.`valor` FROM `reglas` INNER  JOIN `tipo_validacion` ON `tipo_validacion`.`id_validacion`=`reglas`.`validacion` AND `reglas`.`estado`=1");
             while ($regla = mysqli_fetch_array($reglas)){
@@ -226,6 +244,10 @@ for ($k=0; $k<$iteracion; $k++){
                     $matrizsalida[$ubicacion] = 0;
                 }
             }
+
+            /********************
+             * Validacion quemada - reglas taller
+             */
             /*if (isset($conteo[1])) {
                 if ($conteo[1] < 2) {
                     $matrizsalida[$ubicacion] = 0;
@@ -248,21 +270,22 @@ for ($k=0; $k<$iteracion; $k++){
     $matriz=$matrizsalida;
     //var_dump($mini);
     $itera = $k+1;
-    echo "<label>Iteracion: " . $itera ."</label><br><table>";
+    echo "<b><label>Iteracion: " . $itera ."</label></b><br><table class='iteracion'>";
     for ($i=0; $i<$filas; $i++){
         echo "<tr>";
         for ($j=0; $j<$columnas; $j++){
             $ubicacion = "c" . $i . "-" . $j;
             if ($matriz[$ubicacion]==0){
-                echo "<td style='background: #6d9eeb'>" . $matriz[$ubicacion] . "</td>";
+                echo "<td class='muerto'></td>";
             }else{
-                echo "<td style='background: #93c47d'>" . $matriz[$ubicacion] . "</td>";
+                echo "<td class='vivo'>" . $matriz[$ubicacion] . "</td>";
             }
 
         }
         echo "</tr>";
     }
-    echo "</table>";
-    echo "<br><br>";
+    echo "</table><br>";
 }
 
+?>
+</center>

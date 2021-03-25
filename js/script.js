@@ -5,6 +5,7 @@ function cuadro() {
     $("#prueba").empty();
     $("#enviar").css("display", "none");
     $("#titulo-iteracion").css("display", "none");
+    $("#titulo-tabla").css("display", "none");
     $("#iteracion").css("display", "none");
     //alert(fila);
     var cuadro;
@@ -24,6 +25,7 @@ function cuadro() {
             $("#enviar").css("display", "block");
             //$("#tabla").css("display", "block");
             $("#titulo-iteracion").css("display", "block");
+            $("#titulo-tabla").css("display", "block");
             $("#col-cuadro").val(col);
             $("#fil-cuadro").val(fila);
         }else {

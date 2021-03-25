@@ -10,16 +10,31 @@ include ('conexion.php');
 
 $reglas = mysqli_query($con, "SELECT `reglas`.`id_regla`, `reglas`.`id_tipo`, `tipo_validacion`.`validacion`, `reglas`.`valor` FROM `reglas` INNER  JOIN `tipo_validacion` ON `tipo_validacion`.`id_validacion`=`reglas`.`validacion` AND `reglas`.`estado`=1 ORDER BY `reglas`.`id_regla` ASC ");
 ?>
-<a href="menu.php"><img src="img/back.png" width="25"></a>
-<a href="crear-regla.php"><img src="img/add.png" width="25"></a>
-<table border="1">
-    <tr>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>El Juego De La Vida</title>
+    <meta charset="UTF-8">
+    <!-- Estilos -->
+    <!--<link href="../css/estilos.css" rel="stylesheet">-->
+    <link href="css/estilos.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/script.js" type="application/javascript"></script>
+</head>
+<body>
+<a href="menu.php"><img src="img/back.png" width="30"></a>
+<a href="crear-regla.php"><img src="img/add.png" width="30"></a>
+<table class="regla" style="margin-top: -10px">
+    <thead>
         <th>Id Regla</th>
         <th>Accion</th>
         <th>Validacion</th>
         <th>Valor de Validacion</th>
         <th>Acciones</th>
-    </tr>
+    </thead>
+    <tbody>
 <?php
 $conteo = 1;
 while ($regla = mysqli_fetch_array($reglas)){
@@ -44,6 +59,7 @@ while ($regla = mysqli_fetch_array($reglas)){
     $conteo++;
 }
 ?>
+    </tbody>
 </table>
 <div>
     <?php
@@ -56,42 +72,78 @@ while ($regla = mysqli_fetch_array($reglas)){
         while ($regla = mysqli_fetch_array($reglas)){
             ?>
             <form action="editar-regla.php" enctype="multipart/form-data" method="post">
-                <label>ID</label>
-                <?php
-                    echo "<input type='number' name='id' id='id' readonly value='" . $regla['id_regla'] . "'>";
-                ?><br>
-                <label>Accion</label>
-                <select id="accion" name="accion">
-                    <?php
-                        while ($vida = mysqli_fetch_array($vidas)){
-                            if ($regla['id_tipo']==$vida['id_tipo']){
-                                echo "<option selected value='" . $vida['id_tipo'] . "'>" . $vida['name'] . "</option>";
-                            }else{
-                                echo "<option value='" . $vida['id_tipo'] ."'>" . $vida['name'] . "</option>";
-                            }
-                        }
-                    ?>
-                </select><br>
-                <label>Tipo de Validacion</label>
-                <select id="validacion" name="validacion">
-                    <?php
-                        while ($validacion = mysqli_fetch_array($validaciones)){
-                            if ($regla['id_validacion'] == $validacion['id_validacion']){
-                                echo "<option selected value='" . $validacion['id_validacion'] . "'>" . $validacion['validacion'] . " " . $validacion['nombre'] . "</option>";
-                            }else{
-                                echo "<option value='" . $validacion['id_validacion'] ."'>" . $validacion['validacion'] . " " . $validacion['nombre'] . "</option>";
-                            }
-                        }
-                    ?>
-                </select><br>
-                <label>Valor de Validacion</label>
-                <?php
-                    echo "<input type='number' min='0' id='valor' name='valor' value='" . $regla['valor'] . "'>";
-                ?><br>
-                <input type="submit">
+                <table class="regla">
+                    <thead>
+                        <th colspan="2">Editar</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label>ID</label>
+                            </td>
+                            <td>
+                            <?php
+                                echo "<input type='number' name='id' id='id' readonly value='" . $regla['id_regla'] . "'>";
+                            ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Accion</label>
+                            </td>
+                            <td>
+                                <select id="accion" name="accion">
+                                <?php
+                                    while ($vida = mysqli_fetch_array($vidas)){
+                                        if ($regla['id_tipo']==$vida['id_tipo']){
+                                            echo "<option selected value='" . $vida['id_tipo'] . "'>" . $vida['name'] . "</option>";
+                                        }else{
+                                            echo "<option value='" . $vida['id_tipo'] ."'>" . $vida['name'] . "</option>";
+                                        }
+                                    }
+                                ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Tipo de Validacion</label>
+                            </td>
+                            <td>
+                                <select id="validacion" name="validacion">
+                                <?php
+                                    while ($validacion = mysqli_fetch_array($validaciones)){
+                                        if ($regla['id_validacion'] == $validacion['id_validacion']){
+                                            echo "<option selected value='" . $validacion['id_validacion'] . "'>" . $validacion['validacion'] . " " . $validacion['nombre'] . "</option>";
+                                        }else{
+                                            echo "<option value='" . $validacion['id_validacion'] ."'>" . $validacion['validacion'] . " " . $validacion['nombre'] . "</option>";
+                                        }
+                                    }
+                                ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Valor de Validacion</label>
+                            </td>
+                            <td>
+                            <?php
+                                echo "<input type='number' min='0' id='valor' name='valor' value='" . $regla['valor'] . "'>";
+                            ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <input type="submit" class="btn w-M br-0 stl-3" style="margin-bottom: 10px">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
     <?php
         }
     }
     ?>
 </div>
+</body>

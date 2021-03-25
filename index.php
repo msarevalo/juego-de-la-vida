@@ -26,20 +26,21 @@
         <label for="filas">Filas</label><input type="number" min="3" class="effect-11" placeholder="Filas" value="3" required name="filas" id="filas">
         <label for="columnas">Columnas</label><input type="number" min="3" class="basic-slide" placeholder="Columnas" value="3" required name="columnas" id="columnas">
         <br><span id="prueba"></span>
-        <br><input type="submit" onclick="cuadro()" value="Generar Cuadro">
+        <br><input type="submit" onclick="cuadro()" value="Generar Cuadro" class="btn w-M br-0 stl-3">
     </center>
     <!--</form>-->
 </div>
 <div>
     <center><br>
         <form id="cuadro" action="iterar.php" enctype="multipart/form-data" method="post">
+            <label id="titulo-tabla" style="display: none">Selecciona las celulas vivas a continuacion:</label><br>
             <table id="tabla" border="1">
 
             </table><br>
-            <label for="iteracion" id="titulo-iteracion" style="display: none">Iteracion</label><input type="number" min="1" max="50" required id="iteracion" name="iteracion" style="display: none" placeholder="Ingresa la cantidad de iteraciones">
+            <label for="iteracion" id="titulo-iteracion" style="display: none">Ingresa la cantida de iteracion</label><input type="number" min="1" required id="iteracion" name="iteracion" style="display: none" placeholder="Numero de iteraciones">
             <input id="fil-cuadro" name="fil-cuadro" style="display: none">
             <input id="col-cuadro" name="col-cuadro" style="display: none"><br>
-            <input type="submit" style="display: none" id="enviar">
+            <input type="submit" style="display: none" id="enviar" class="btn w-M br-0 stl-3">
         </form>
     </center>
 </div>

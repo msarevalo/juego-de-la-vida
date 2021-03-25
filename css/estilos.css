@@ -1,3 +1,7 @@
+* {
+    font-family: "Segoe UI";
+}
+
 .btn {
     text-align: center;
     margin: 0 auto;
@@ -93,4 +97,66 @@ ANIMACIONES
     50% {transform: scale(1,1);}
     75% {transform: scale(1.5,1);}
     100% {transform: scale(1,1);}
+}
+
+.regla {
+    text-align: center;
+    line-height: 40px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #ed1c40;
+    width: 500px;
+    margin: 50px auto;
+    border-radius: .25rem;
+}
+
+.regla thead tr:first-child {
+    background: #ed1c40;
+    color: #fff;
+    border: none;
+}
+
+.regla th:first-child,
+.regla td:first-child {
+    padding: 0 15px 0 20px;
+}
+
+.regla th {
+    font-weight: 500;
+}
+
+.regla thead tr:last-child th {
+    border-bottom: 3px solid #ddd;
+}
+
+.regla tbody tr:hover {
+    background-color: #f2f2f2;
+    cursor: default;
+}
+
+.regla tbody tr:last-child td {
+    border: none;
+}
+
+.regla tbody td {
+    border-bottom: 1px solid #ddd;
+}
+
+.regla td:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.iteracion td{
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+
+.vivo {
+    background: #93c47d;
+}
+
+.muerto {
+    background: #6d9eeb;
 }

@@ -11,10 +11,12 @@
     <script src="../js/script.js" type="application/javascript"></script>
 </head>
 <body>
-<div style="margin-left: 350px; margin-top: 200px">
+<center>
+<div style="margin-top: 200px">
     <a href="reglas.php" class="btn w-M br-0 stl-3" style="text-decoration: none">Administrar Reglas</a>
     <a href="index.php" class="btn w-M br-0 stl-3" style="text-decoration: none">Juego de La vida</a>
     <!--<p id="prueba" style="text-transform: uppercase"></p>-->
 </div>
+</center>
 </body>
 </html>
